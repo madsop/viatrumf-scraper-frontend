@@ -1,6 +1,7 @@
 -<template>
     <div>
         <h1>Historikk for nettbutikkar på Viatrumf</h1>
+        <p>Usikker på om Viatrumf-bonusen på nettbutikken du vil handle hos har gått opp, ned eller er uendra? Sjekk ved å velje butikken i nedtrekkslista.</p> 
         <select v-model="selected" v-on:change="selectionChanged">
             <option default selected="selected">Velg nettbutikk</option>
             <option v-for="nettbutikk in nettbutikker" :key="nettbutikk.namn" v-bind:value="nettbutikk">
