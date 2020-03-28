@@ -1,13 +1,16 @@
 -<template>
     <div>
-        <h1>Nettbutikker</h1>
+        <h1>Historikk for nettbutikkar på Viatrumf</h1>
         <select v-model="selected" v-on:change="selectionChanged">
-            <option selected="selected">Velg nettbutikk</option>
+            <option default selected="selected">Velg nettbutikk</option>
             <option v-for="nettbutikk in nettbutikker" :key="nettbutikk.namn" v-bind:value="nettbutikk">
-                {{ nettbutikk }} 
+                {{ nettbutikk | removeUnderscore }} 
             </option>
         </select>
         <Nettbutikk :namn=selected :innslag=selectedNettbutikk />
+       <!-- <ul v-for="nettbutikk in nettbutikker" :key="nettbutikk.namn" v-bind:value="nettbutikk">
+            <li>{{ nettbutikk }}</li>
+        </ul> -->
     </div>
 </template>
 
@@ -42,3 +45,10 @@ export default Vue.extend({
     }
 });
 </script>
+
+<style scoped>
+ul, li {
+    margin: 0;
+    padding: 0;
+}
+</style>
