@@ -5,26 +5,32 @@ export default {
   extends: Line,
   props: ['labels', 'data'],
   mounted() {
-    this.doRender();
+    (this as any).doRender();
   },
   methods: {
     doRender: function() {
-      (this as any).renderChart(
-        {
-          labels: this.labels,
-          datasets: [
-        {
-          label: "Prisendringar",
-          data: this.data,
-          backgroundColor: "transparent",
-          borderColor: "rgba(1, 116, 188, 0.50)",
-          pointBackgroundColor: "rgba(171, 71, 188, 1)"
-        }
-      ],
+      const self = (this as any);
+      self.renderChart({
+          labels: self.labels,
+          datasets: [{
+            label: "Prisendringar",
+            data: self.data,
+            backgroundColor: "transparent",
+            borderColor: "rgba(1, 116, 188, 0.50)",
+            pointBackgroundColor: "rgba(171, 71, 188, 1)",
+          }],
         },
         {
           responsive: true,
-          maintainAspectRatio: false
+          maintainAspectRatio: false,
+          tooltips: {
+            enabled: true,
+            callbacks: {
+            label: ((tooltipItems: any) => {
+              return tooltipItems.yLabel;
+            })
+          }
+          },
         }
       );
     },
