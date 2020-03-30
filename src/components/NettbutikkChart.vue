@@ -3,17 +3,11 @@ import { Line } from "vue-chartjs";
 
 export default {
   extends: Line,
+  props: {
+    labels: Array
+  },
   data: function () {
     return {
-      labels: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July"
-      ],
       datasets: [
         {
           label: "Data 1",
@@ -26,6 +20,12 @@ export default {
     
     };
   },
+  methods: {
+    addPoint(label, data) {
+      this.labels.push(label);
+      this.datasets.data.push(data);
+    }
+  },
   mounted() {
     this.renderChart(
       {
@@ -37,7 +37,7 @@ export default {
         maintainAspectRatio: false,
         title: {
           display: true,
-          text: "My Data"
+          text: "Prisendringar"
         }
       }
     );

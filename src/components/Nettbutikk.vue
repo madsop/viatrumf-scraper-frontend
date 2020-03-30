@@ -6,7 +6,7 @@
             <hr />
             <a  :href="'https://viatrumf.no/' + innslag[0].href">Til Viatrumf-sida</a>
         </div>
-        <LineChart />
+        <LineChart v-bind:labels="['January', 'February', 'March', 'April', 'May', 'June', 'July']" />
         <table>
         <div v-for="enkeltinnslag in innslag" :key="enkeltinnslag.timestamp">
                 <tr>
@@ -20,7 +20,7 @@
 
 <script lang="ts">
 
-import LineChart from '@/components//NettbutikkChart.vue';
+import LineChart from '@/components/NettbutikkChart.vue';
 
 
 export default {
