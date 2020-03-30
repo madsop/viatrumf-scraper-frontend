@@ -5,47 +5,55 @@
             {{ innslag[0].kategori | capitalizeFirst }}
             <hr />
             <a  :href="'https://viatrumf.no/' + innslag[0].href">Til Viatrumf-sida</a>
+            <LineChart 
+                :labels=this.labels
+                :data=this.data
+            />
         </div>
         <table>
-        <div v-for="enkeltinnslag in innslag" :key="enkeltinnslag.timestamp">
-                <tr>
-                    <td>{{ enkeltinnslag.timestamp | formatTime }}</td>
-                    <td><strong>{{enkeltinnslag.verdi }}</strong></td>
-                </tr>
-        </div>
+            <tr v-for="enkeltinnslag in innslag" :key="enkeltinnslag.timestamp">
+                <td>{{ enkeltinnslag.timestamp | formatTime }}</td>
+                <td><strong>{{enkeltinnslag.verdi }}</strong></td>
+            </tr>
         </table>
     </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import moment from 'moment';
 
-@Component
-export default class Nettbutikk extends Vue {
-  @Prop() private namn!: string;
-  @Prop() private innslag!: [];
+import LineChart from '@/components/NettbutikkChart.vue';
+import { Vue} from 'vue-property-decorator'; 
 
-  public setNamn(namn: string) {
-      this.namn = namn;
-  }
-
-  public setInnslag(innslag: []) {
-      this.innslag = innslag;
-  }
+export default {
+    extends: Vue,
+    components: {
+        LineChart
+    },
+    props: ['namn', 'innslag'],
+    methods: {
+        trim(input: string): string {
+            return input.replace(/%/g, '').replace(/kr/g, '',).replace(' ', '').replace(',', '.');
+        }
+    },
+    computed: {
+        labels(): string[] {
+            const label = [] as string[];
+            (this as any).innslag.forEach((e: any) => {
+                label.push(e.timestamp);
+            });
+            return label;
+        },
+        data(): string[] {
+            const datapunkt = [] as string[];
+            const self = (this as any);
+            self.innslag.forEach((e: any) => {
+                datapunkt.push(self.trim((e.verdi as string)));
+            });
+            return datapunkt;
+        }
+    },
 }
-Vue.filter('formatTime', function(timestamp: string) {
-    if (!timestamp) return;
-    return moment(timestamp, 'YYYYMMDDTHHmmssZ').format('Do MMMM YYYY, hh.mm'); 
-})
-Vue.filter('removeUnderscore', function(value: string) {
-    if (!value) return;
-    return value.replace(/_/g, ' ');
-})
-Vue.filter('capitalizeFirst', function(value: string) {
-    if (!value) return;
-    return value.charAt(0).toUpperCase() + value.slice(1);
-})
+
 </script>
 
 <style scoped>
