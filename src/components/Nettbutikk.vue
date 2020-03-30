@@ -11,12 +11,10 @@
             />
         </div>
         <table>
-        <div v-for="enkeltinnslag in innslag" :key="enkeltinnslag.timestamp">
-                <tr>
-                    <td>{{ enkeltinnslag.timestamp | formatTime }}</td>
-                    <td><strong>{{enkeltinnslag.verdi }}</strong></td>
-                </tr>
-        </div>
+            <tr v-for="enkeltinnslag in innslag" :key="enkeltinnslag.timestamp">
+                <td>{{ enkeltinnslag.timestamp | formatTime }}</td>
+                <td><strong>{{enkeltinnslag.verdi }}</strong></td>
+            </tr>
         </table>
     </div>
 </template>
@@ -24,7 +22,6 @@
 <script lang="ts">
 
 import LineChart from '@/components/NettbutikkChart.vue';
-
 import { Vue} from 'vue-property-decorator'; 
 
 export default {
