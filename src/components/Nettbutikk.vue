@@ -33,6 +33,11 @@ export default {
         LineChart
     },
     props: ['namn', 'innslag'],
+    methods: {
+        trim(input: string): string {
+            return input.replace(/%/g, '').replace(/kr/g, '',).replace(' ', '').replace(',', '.');
+        }
+    },
     computed: {
         labels(): string[] {
             const label = [] as string[];
@@ -43,10 +48,9 @@ export default {
         },
         data(): string[] {
             const datapunkt = [] as string[];
-            (this as any).innslag.forEach((e: any) => {
-                let asString = (e.verdi as string);
-                asString = asString.replace(/%/g, '').replace(/kr/g, '',).replace(' ', '').replace(',', '.');
-                datapunkt.push(asString);
+            const self = (this as any);
+            self.innslag.forEach((e: any) => {
+                datapunkt.push(self.trim((e.verdi as string)));
             });
             return datapunkt;
         }
