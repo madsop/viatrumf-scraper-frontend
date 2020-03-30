@@ -21,12 +21,6 @@ export default {
     
     };
   },
-  methods: {
-    addPoint(label, data) {
-      this.labels.push(label);
-      this.datasets.data.push(data);
-    }
-  },
   mounted() {
     this.renderChart(
       {
