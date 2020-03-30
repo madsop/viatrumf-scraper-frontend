@@ -18,26 +18,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import moment from 'moment';
 
 export default {
-    extends: Vue,
     props: ['namn', 'innslag'],
 }
 
-Vue.filter('formatTime', function(timestamp: string) {
-    if (!timestamp) return;
-    return moment(timestamp, 'YYYYMMDDTHHmmssZ').format('Do MMMM YYYY, hh.mm'); 
-})
-Vue.filter('removeUnderscore', function(value: string) {
-    if (!value) return;
-    return value.replace(/_/g, ' ');
-})
-Vue.filter('capitalizeFirst', function(value: string) {
-    if (!value) return;
-    return value.charAt(0).toUpperCase() + value.slice(1);
-})
 </script>
 
 <style scoped>
