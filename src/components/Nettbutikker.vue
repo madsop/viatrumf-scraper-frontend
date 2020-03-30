@@ -26,7 +26,7 @@ export default Vue.extend({
     },
     data: () => ({
         baseurl: 'https://viatrumf-scraper-bff-xgjgr2ubbq-ew.a.run.app',
-        nettbutikker: [] as Nettbutikk[],
+        nettbutikker: [],
         selected: '',
         selectedNettbutikk: [],
     }),

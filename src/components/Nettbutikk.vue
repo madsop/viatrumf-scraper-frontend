@@ -21,19 +21,11 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import moment from 'moment';
 
-@Component
-export default class Nettbutikk extends Vue {
-  @Prop() private namn!: string;
-  @Prop() private innslag!: [];
-
-  public setNamn(namn: string) {
-      this.namn = namn;
-  }
-
-  public setInnslag(innslag: []) {
-      this.innslag = innslag;
-  }
+export default {
+    extends: Vue,
+    props: ['namn', 'innslag'],
 }
+
 Vue.filter('formatTime', function(timestamp: string) {
     if (!timestamp) return;
     return moment(timestamp, 'YYYYMMDDTHHmmssZ').format('Do MMMM YYYY, hh.mm'); 
