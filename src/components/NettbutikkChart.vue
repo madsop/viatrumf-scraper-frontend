@@ -4,14 +4,15 @@ import { Line } from "vue-chartjs";
 export default {
   extends: Line,
   props: {
-    labels: Array
+    labels: Array,
+    data: Array
   },
   data: function () {
     return {
       datasets: [
         {
-          label: "Data 1",
-          data: [2, 10, 5, 9, 0, 6, 20],
+          label: "Prisendringar",
+          data: this.data,
           backgroundColor: "transparent",
           borderColor: "rgba(1, 116, 188, 0.50)",
           pointBackgroundColor: "rgba(171, 71, 188, 1)"
@@ -34,11 +35,7 @@ export default {
       },
       {
         responsive: true,
-        maintainAspectRatio: false,
-        title: {
-          display: true,
-          text: "Prisendringar"
-        }
+        maintainAspectRatio: false
       }
     );
   }

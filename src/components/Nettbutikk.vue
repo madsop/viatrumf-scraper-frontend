@@ -6,7 +6,10 @@
             <hr />
             <a  :href="'https://viatrumf.no/' + innslag[0].href">Til Viatrumf-sida</a>
         </div>
-        <LineChart v-bind:labels="['January', 'February', 'March', 'April', 'May', 'June', 'July']" />
+        <LineChart 
+            v-bind:labels="['January', 'February', 'March', 'April', 'May', 'June', 'July']"
+            v-bind:data="[2, 10, 5, 9, 0, 6, 20]"
+        />
         <table>
         <div v-for="enkeltinnslag in innslag" :key="enkeltinnslag.timestamp">
                 <tr>
