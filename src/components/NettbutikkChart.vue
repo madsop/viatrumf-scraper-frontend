@@ -1,5 +1,5 @@
-<script>
-import { Line, mixins } from "vue-chartjs";
+<script lang="ts">
+import { Line } from "vue-chartjs";
 
 export default {
   extends: Line,
@@ -9,7 +9,7 @@ export default {
   },
   methods: {
     doRender: function() {
-      this.renderChart(
+      (this as any).renderChart(
         {
           labels: this.labels,
           datasets: [
@@ -30,9 +30,10 @@ export default {
     },
   },
   watch: {
-    labels: function() {
-      this.$data._chart.destroy();
-      this.doRender();
+    data: function() {
+      const self = (this as any);
+      self.$data._chart.destroy();
+      self.doRender();
     }
   }
 };
