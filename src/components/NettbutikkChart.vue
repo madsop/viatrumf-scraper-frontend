@@ -1,15 +1,18 @@
 <script>
-import { Line } from "vue-chartjs";
+import { Line, mixins } from "vue-chartjs";
 
 export default {
   extends: Line,
-  props: {
-    labels: Array,
-    data: Array
+  props: ['labels', 'data'],
+  mounted() {
+    this.doRender();
   },
-  data: function () {
-    return {
-      datasets: [
+  methods: {
+    doRender: function() {
+      this.renderChart(
+        {
+          labels: this.labels,
+          datasets: [
         {
           label: "Prisendringar",
           data: this.data,
@@ -18,20 +21,19 @@ export default {
           pointBackgroundColor: "rgba(171, 71, 188, 1)"
         }
       ],
-    
-    };
+        },
+        {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      );
+    },
   },
-  mounted() {
-    this.renderChart(
-      {
-        labels: this.labels,
-        datasets: this.datasets,
-      },
-      {
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    );
+  watch: {
+    labels: function() {
+      this.$data._chart.destroy();
+      this.doRender();
+    }
   }
 };
 </script>
