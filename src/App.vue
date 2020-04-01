@@ -5,32 +5,19 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import Nettbutikker from '@/components/Nettbutikker.vue';
-import moment from 'moment';
+import { Component, Vue } from 'vue-property-decorator'
+import Nettbutikker from '@/components/Nettbutikker.vue'
 
-
-
-Vue.filter('formatTime', function(timestamp: string) {
-    if (!timestamp) return;
-    return moment(timestamp, 'YYYYMMDDTHHmmssZ').format('Do MMMM YYYY, hh.mm'); 
-})
-Vue.filter('removeUnderscore', function(value: string) {
-    if (!value) return;
-    return value.replace(/_/g, ' ');
-})
-Vue.filter('capitalizeFirst', function(value: string) {
-    if (!value) return;
-    return value.charAt(0).toUpperCase() + value.slice(1);
+Vue.filter('removeUnderscore', (value: string) => {
+  if (!value) return
+  return value.replace(/_/g, ' ')
 })
 
 @Component({
   components: {
-    Nettbutikker,
-  },
+    Nettbutikker
+  }
 })
-
-
 export default class App extends Vue {}
 </script>
 
