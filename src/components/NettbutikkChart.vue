@@ -14,9 +14,8 @@ export default class NettbutikkChart extends Vue {
   }
 
   doRender() {
-    // const self = this as any // Kan brukes om man vil slippe neste kommentaren paa neste linje
-    // eslint-disable-next-line
-    this.renderChart(
+    const self = this as any
+    self.renderChart(
       {
         labels: this.labels,
         datasets: [
