@@ -41,10 +41,17 @@ export default class Nettbutikker extends Vue {
       .then(response => (this.selectedNettbutikk = response.data))
   }
 
+  sort(a: string, b: string): number {
+    if (!a) return 1
+    if (!b) return 1
+    return a.toLowerCase().localeCompare(b.toLowerCase())
+  }
+
   mounted() {
     axios
       .get(this.baseurl + '/nettbutikkar')
-      .then(response => (this.nettbutikker = response.data))
+      .then(response => response.data.sort(this.sort))
+      .then(data => this.nettbutikker = data);
   }
 }
 </script>
