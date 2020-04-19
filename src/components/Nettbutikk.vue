@@ -22,6 +22,7 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import LineChart from '@/components/NettbutikkChart.vue'
 import INettbutikkInnslag from '@/model/INettbutikkInnslag'
 import moment from 'moment'
+import 'moment/locale/nn'
 
 @Component({
   components: {
@@ -44,7 +45,7 @@ export default class Nettbutikk extends Vue {
     const labels: string[] = []
 
     this.innslag.forEach((enkeltInnslag: INettbutikkInnslag) => {
-      labels.push(enkeltInnslag.timestamp)
+      labels.push(this.formatTimeForGraph(enkeltInnslag.timestamp))
     })
     return labels
   }
@@ -62,12 +63,19 @@ export default class Nettbutikk extends Vue {
     if (!timestamp) return ''
     return moment(timestamp, 'YYYYMMDDTHHmmssZ').format('Do MMMM YYYY, HH.mm')
   }
+
+  formatTimeForGraph(timestamp: string): string {
+    if (!timestamp) return ''
+    return moment(timestamp, 'YYYYMMDDTHHmmssZ').format('Do MMMM')
+
+  }
 }
 </script>
 
 <style scoped>
 td {
   width: 200px;
-  padding: 0.5em 1em;
+  padding: 0;
+  margin: 0.1em 1em;
 }
 </style>
