@@ -2,7 +2,6 @@
   <div>
     <h1>{{ namn | removeUnderscore }}</h1>
     <div v-if="innslag.length > 0">
-      {{ capitalizeFirst(innslag[0].kategori) }}
       <hr />
       <a :href="'https://viatrumf.no/' + innslag[0].href">Til Viatrumf-sida</a>
       <LineChart :labels="labels" :data="datapunkter" />
@@ -62,11 +61,6 @@ export default class Nettbutikk extends Vue {
   formatTime(timestamp: string): string {
     if (!timestamp) return ''
     return moment(timestamp, 'YYYYMMDDTHHmmssZ').format('Do MMMM YYYY, hh.mm')
-  }
-
-  capitalizeFirst(value: string): string {
-    if (!value) return ''
-    return value.charAt(0).toUpperCase() + value.slice(1)
   }
 }
 </script>
