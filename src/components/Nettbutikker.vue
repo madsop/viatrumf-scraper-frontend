@@ -1,5 +1,6 @@
 -<template>
   <div>
+    <loading :active.sync="isLoading" />
     <h1>Historikk for nettbutikkar på Viatrumf</h1>
     <p>
       Usikker på om Viatrumf-bonusen på nettbutikken du vil handle hos har gått
@@ -24,9 +25,13 @@ import { Vue, Component } from 'vue-property-decorator'
 import axios from 'axios'
 import Nettbutikk from '@/components/Nettbutikk.vue'
 
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
+
 @Component({
   components: {
-    Nettbutikk
+    Nettbutikk,
+    Loading
   }
 })
 export default class Nettbutikker extends Vue {
@@ -34,6 +39,7 @@ export default class Nettbutikker extends Vue {
   private nettbutikker = []
   private selected = ''
   private selectedNettbutikk = []
+  private isLoading = true
 
   selectionChanged(): void {
     axios
@@ -51,7 +57,10 @@ export default class Nettbutikker extends Vue {
     axios
       .get(this.baseurl + '/nettbutikkar')
       .then(response => response.data.sort(this.sort))
-      .then(data => this.nettbutikker = data);
+      .then(data => {
+        this.nettbutikker = data
+        this.isLoading = false
+      });
   }
 }
 </script>
