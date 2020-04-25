@@ -1,10 +1,11 @@
 -<template>
-  <div>
+  <div>    
     <h1>Historikk for nettbutikkar på Viatrumf</h1>
     <p>
       Usikker på om Viatrumf-bonusen på nettbutikken du vil handle hos har gått
       opp, ned eller er uendra? Sjekk ved å velje butikken i nedtrekkslista.
     </p>
+    <vue-loading v-if="loading" type="spin" color="#d9544e" :size="{ width: '50px', height: '50px' }"></vue-loading>
     <select v-model="selected" v-on:change="selectionChanged">
       <option value="" selected disabled>Velg nettbutikk</option>
       <option
@@ -23,10 +24,12 @@
 import { Vue, Component } from 'vue-property-decorator'
 import axios from 'axios'
 import Nettbutikk from '@/components/Nettbutikk.vue'
+import { VueLoading } from 'vue-loading-template'
 
 @Component({
   components: {
-    Nettbutikk
+    Nettbutikk,
+    VueLoading
   }
 })
 export default class Nettbutikker extends Vue {
@@ -34,6 +37,7 @@ export default class Nettbutikker extends Vue {
   private nettbutikker = []
   private selected = ''
   private selectedNettbutikk = []
+  private loading = true
 
   selectionChanged(): void {
     axios
@@ -51,7 +55,10 @@ export default class Nettbutikker extends Vue {
     axios
       .get(this.baseurl + '/nettbutikkar')
       .then(response => response.data.sort(this.sort))
-      .then(data => this.nettbutikker = data);
+      .then(data => {
+        this.nettbutikker = data
+        this.loading = false
+      });
   }
 }
 </script>
