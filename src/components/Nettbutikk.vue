@@ -3,7 +3,7 @@
     <h1>{{ namn | removeUnderscore }}</h1>
     <div v-if="innslag.length > 0">
       <hr />
-      <a :href="'https://viatrumf.no/' + innslag[0].href">Til Viatrumf-sida</a>
+      <a :href="'https://viatrumf.no' + innslag[0].href">Til Viatrumf-sida</a>
       <LineChart :labels="labels" :data="datapunkter" />
     </div>
     <table>
