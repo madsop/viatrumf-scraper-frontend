@@ -16,6 +16,7 @@
         {{ nettbutikk | removeUnderscore }}
       </option>
     </select>
+    <button v-on:click="selectionChanged" class="reload">Last inn på nytt</button>
     <Nettbutikk :namn="selected" :innslag="selectedNettbutikk" />
   </div>
 </template>
@@ -62,3 +63,19 @@ export default class Nettbutikker extends Vue {
   }
 }
 </script>
+
+<style scoped>
+
+button.reload {
+  border: none;
+  background-color: inherit;
+  padding: 1px;
+  margin: 0 4px 4px 4px;
+  font-size: 0.7em;
+  cursor: pointer;
+}
+
+select {
+  background-color: inherit;
+}
+</style>
