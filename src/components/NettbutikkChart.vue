@@ -38,7 +38,10 @@ export default class NettbutikkChart extends Vue {
               return tooltipItems.yLabel
             }
           }
-        }
+        },
+         legend: {
+            display: false,
+         },
       }
     )
   }
