@@ -16,7 +16,8 @@
         {{ nettbutikk | removeUnderscore }}
       </option>
     </select>
-    <button v-on:click="selectionChanged" class="reload">Last inn på nytt</button>
+    <button v-on:click="selectionChanged" class="reload"><img id="reloadIcon" src="@/assets/reload-icon.png" alt="reload" /></button>
+   
     <Nettbutikk :namn="selected" :innslag="selectedNettbutikk" />
   </div>
 </template>
@@ -78,4 +79,10 @@ button.reload {
 select {
   background-color: inherit;
 }
+
+img#reloadIcon {
+  width: 1em;
+  height: 1em
+}
+
 </style>
