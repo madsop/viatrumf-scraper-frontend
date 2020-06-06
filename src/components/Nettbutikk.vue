@@ -88,4 +88,8 @@ select#datapunkter {
   margin-top: 2em;
 }
 
+a {
+  color: #385898;
+}
+
 </style>
