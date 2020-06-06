@@ -1,19 +1,16 @@
 <template>
   <div>
     <h1>{{ namn | removeUnderscore }}</h1>
-    <div v-if="innslag.length > 0">
+    <div v-if="loaded">
       <hr />
       <a :href="'https://viatrumf.no' + innslag[0].href" target="_blank">Til Viatrumf-sida</a>
       <LineChart :labels="labels" :data="datapunkter" />
     </div>
-    <table>
-      <tr v-for="enkeltinnslag in innslag" :key="enkeltinnslag.timestamp">
-        <td>{{ formatTime(enkeltinnslag.timestamp) }}</td>
-        <td>
-          <strong>{{ enkeltinnslag.verdi }}</strong>
-        </td>
-      </tr>
-    </table>
+    <select id="datapunkter" v-if="loaded" :key="innslag">
+      <option v-for="enkeltinnslag in reversedInnslag" :key="enkeltinnslag.timestamp" v-bind:value="enkeltinnslag">
+        {{ formatTime(enkeltinnslag.timestamp) }}: {{ enkeltinnslag.verdi }}
+      </option>
+    </select>
   </div>
 </template>
 
@@ -41,6 +38,10 @@ export default class Nettbutikk extends Vue {
       .replace(',', '.')
   }
 
+  get loaded(): boolean {
+    return this.innslag.length > 0;
+  }
+
   get labels(): string[] {
     const labels: string[] = []
 
@@ -59,6 +60,10 @@ export default class Nettbutikk extends Vue {
     return datapunkter
   }
 
+  get reversedInnslag(): INettbutikkInnslag[] {
+  return this.innslag.map((item,idx) => this.innslag[this.innslag.length-1-idx])
+  }
+
   formatTime(timestamp: string): string {
     if (!timestamp) return ''
     return moment(timestamp, 'YYYYMMDDTHHmmssZ').format('Do MMMM YYYY, HH.mm')
@@ -69,6 +74,7 @@ export default class Nettbutikk extends Vue {
     return moment(timestamp, 'YYYYMMDDTHHmmssZ').format('Do MMMM')
 
   }
+
 }
 </script>
 
@@ -78,4 +84,9 @@ td {
   padding: 0;
   margin: 0.1em 1em;
 }
+
+select#datapunkter {
+  margin-top: 2em;
+}
+
 </style>
