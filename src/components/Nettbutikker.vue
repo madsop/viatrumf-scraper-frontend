@@ -16,7 +16,7 @@
         {{ nettbutikk | removeUnderscore }}
       </option>
     </select>
-    <button v-on:click="selectionChanged" class="reload"><img id="reloadIcon" src="@/assets/reload-icon.png" alt="reload" /></button>
+    <button v-on:click="selectionChanged" v-if="selected" class="reload"><img id="reloadIcon" src="@/assets/reload-icon.png" alt="reload" /></button>
    
     <Nettbutikk :namn="selected" :innslag="selectedNettbutikk" />
   </div>
