@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h1>{{ namn | removeUnderscore }}</h1>
     <div v-if="loaded">
+      <a :href="'https://viatrumf.no' + innslag[0].href" target="_blank"><h1>{{ namn | removeUnderscore }}</h1></a>
       <hr />
-      <a :href="'https://viatrumf.no' + innslag[0].href" target="_blank">Til Viatrumf-sida</a>
       <LineChart :labels="labels" :data="datapunkter" />
     </div>
     <select id="datapunkter" v-if="loaded" :key="innslag">
