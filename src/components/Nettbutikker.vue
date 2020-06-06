@@ -1,7 +1,7 @@
 -<template>
   <div>    
     <h1>Historikk for nettbutikkar på Viatrumf</h1>
-    <p>
+    <p v-if="!selected">
       Usikker på om Viatrumf-bonusen på nettbutikken du vil handle hos har gått
       opp, ned eller er uendra? Sjekk ved å velje butikken i nedtrekkslista.
     </p>
