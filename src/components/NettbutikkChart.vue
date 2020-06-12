@@ -62,11 +62,3 @@ export default class NettbutikkChart extends Vue {
   }
 }
 </script>
-
-<style scoped>
-
-
-label { 
-   transform: rotate(-90deg);
-}
-</style>
