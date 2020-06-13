@@ -39,9 +39,18 @@ export default class NettbutikkChart extends Vue {
             }
           }
         },
-         legend: {
-            display: false,
-         },
+        legend: {
+          display: false,
+        },
+        scales: {
+          xAxes: [{
+            ticks: {
+              autoSkip: false,
+              maxRotation: 90,
+              minRotation: 90
+              }
+          }]
+        }
       }
     )
   }
