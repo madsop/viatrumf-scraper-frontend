@@ -5,7 +5,7 @@
       <hr />
       <LineChart :labels="labels" :data="datapunkter" :innslag="innslag" />
     </div>
-    <select id="datapunkter" v-if="loaded" :key="innslag">
+    <select id="datapunkter" v-if="loaded" :key="innslag.namn+innslag.timestamp">
       <option v-for="enkeltinnslag in reversedInnslag" :key="enkeltinnslag.timestamp" v-bind:value="enkeltinnslag">
         {{ formatTime(enkeltinnslag.timestamp) }}: {{ enkeltinnslag.verdi }}
       </option>
@@ -68,6 +68,9 @@ export default class Nettbutikk extends Vue {
 
   utdatert(): boolean {
     const sisteInnslag = this.innslag[this.innslag.length-1]
+    if (sisteInnslag === undefined) {
+      return false
+    }
     const somDato = moment(sisteInnslag.timestamp, 'YYYYMMDDTHHmmssZ')
     return somDato.isBefore(moment().subtract(1, 'day').startOf('day'))  
   }
