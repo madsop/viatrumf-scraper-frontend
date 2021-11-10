@@ -1,6 +1,7 @@
 <script lang="ts">
 import { Line } from 'vue-chartjs'
 import { Prop, Watch, Component, Vue } from 'vue-property-decorator'
+import moment from 'moment'
 
 @Component({
   extends: Line
@@ -8,6 +9,8 @@ import { Prop, Watch, Component, Vue } from 'vue-property-decorator'
 export default class NettbutikkChart extends Vue {
   @Prop() labels!: string[]
   @Prop() data!: string[]
+  @Prop() innslag!: any[]
+  @Prop() formatDate: any
 
   mounted() {
     this.doRender()
@@ -35,7 +38,7 @@ export default class NettbutikkChart extends Vue {
           enabled: true,
           callbacks: {
             label: (tooltipItems: any) => {
-              return tooltipItems.yLabel
+              return self.formatTime(self.innslag[tooltipItems.index].timestamp) +": " + tooltipItems.yLabel
             }
           }
         },
@@ -53,6 +56,11 @@ export default class NettbutikkChart extends Vue {
         }
       }
     )
+  }
+
+  formatTime(timestamp: string): string {
+    if (!timestamp) return ''
+    return moment(timestamp, 'YYYYMMDDTHHmmssZ').format('Do MMMM YYYY, HH.mm')
   }
 
   @Watch('data')

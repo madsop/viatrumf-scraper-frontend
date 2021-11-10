@@ -3,7 +3,7 @@
     <div v-if="loaded">
       <a :href="'https://viatrumf.no' + innslag[0].href" target="_blank"><h1>{{ namn | removeUnderscore }}</h1></a>
       <hr />
-      <LineChart :labels="labels" :data="datapunkter" />
+      <LineChart :labels="labels" :data="datapunkter" :innslag="innslag" />
     </div>
     <select id="datapunkter" v-if="loaded" :key="innslag">
       <option v-for="enkeltinnslag in reversedInnslag" :key="enkeltinnslag.timestamp" v-bind:value="enkeltinnslag">
