@@ -10,6 +10,9 @@
         {{ formatTime(enkeltinnslag.timestamp) }}: {{ enkeltinnslag.verdi }}
       </option>
     </select>
+    <div v-if="utdatert()" id="utdatert">
+      Obs: Siste innslag er ikkje frå i dag. Det kan tyde at nettbutikken ikkje lenger er på Viatrumf.
+    </div>
   </div>
 </template>
 
@@ -63,6 +66,11 @@ export default class Nettbutikk extends Vue {
     return moment(timestamp, 'YYYYMMDDTHHmmssZ').format('Do MMMM YYYY, HH.mm')
   }
 
+  utdatert(): boolean {
+    const sisteInnslag = this.innslag[this.innslag.length-1]
+    const somDato = moment(sisteInnslag.timestamp, 'YYYYMMDDTHHmmssZ')
+    return somDato.isBefore(moment().subtract(1, 'day').startOf('day'))  
+  }
 }
 </script>
 
@@ -79,6 +87,11 @@ select#datapunkter {
 
 a {
   color: #385898;
+}
+
+#utdatert {
+  margin-top: 1.5em;
+  color: red;
 }
 
 </style>
