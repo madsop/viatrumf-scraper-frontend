@@ -10,7 +10,7 @@
   "dependencies": {
     "@types/chart.js": "^2.9.34",
     "axios": "^0.24.0",
-    "chart.js": "^2.9.4",
+    "chart.js": "^3.6.1",
     "core-js": "^3.19.1",
     "moment": "^2.29.1",
     "vue": "^2.6.14",
