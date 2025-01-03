@@ -1,26 +1,26 @@
 button.reload {
-    border: none;
-    background-color: inherit;
-    padding: 1px;
-    margin: 0 4px 4px 4px;
-    font-size: 0.7em;
-    cursor: pointer;
-  }
-  
-  select {
-    background-color: inherit;
-  }
-  
-  img#reloadIcon {
-    width: 1em;
-    height: 1em
-  }
+  border: none;
+  background-color: inherit;
+  padding: 1px;
+  margin: 0 4px 4px 4px;
+  font-size: 0.7em;
+  cursor: pointer;
+}
 
-  #root {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-  }
+select {
+  background-color: inherit;
+}
+
+img#reloadIcon {
+  width: 1em;
+  height: 1em;
+}
+
+#root {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
