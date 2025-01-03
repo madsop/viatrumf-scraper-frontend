@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="loaded">
-      <a :href="'https://viatrumf.no' + innslag[0].href" target="_blank"><h1>{{ namn | removeUnderscore }}</h1></a>
+      <a :href="'https://trumfnetthandel.no' + innslag[0].href" target="_blank"><h1>{{ namn | removeUnderscore }}</h1></a>
       <hr />
       <LineChart :labels="labels" :data="datapunkter" :innslag="innslag" />
     </div>
