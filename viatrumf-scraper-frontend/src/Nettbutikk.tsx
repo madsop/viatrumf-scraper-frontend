@@ -3,18 +3,12 @@ import axios from "axios";
 import baseurl from "./URL.ts";
 import moment from "moment";
 import "./Nettbutikk.css";
+import Graf from "./Graf.tsx";
+import { Innslag } from "./Innslag.ts";
+import { trim } from "./Trim.ts";
 
 interface Nettbutikktittel {
   namn: string;
-}
-
-interface Innslag {
-  href: string;
-  kategori: string | undefined;
-  namn: string;
-  popularitet: Number;
-  timestamp: string;
-  verdi: string;
 }
 
 function Nettbutikk({ namn }: Nettbutikktittel) {
@@ -37,14 +31,6 @@ function Nettbutikk({ namn }: Nettbutikktittel) {
     setErUtdatert(somDato.isBefore(moment().subtract(1, "day").startOf("day")));
   }, [innslag]);
 
-  const trim = (input: string): string => {
-    return input
-      .replace(/%/g, "")
-      .replace(/kr/g, "")
-      .replace(" ", "")
-      .replace(",", ".");
-  };
-
   return (
     <>
       {innslag.length && (
@@ -55,8 +41,11 @@ function Nettbutikk({ namn }: Nettbutikktittel) {
           <h1>{trim(namn)}</h1>
         </a>
       )}
-      {namn}
+      <hr />
       {innslag.length && <div>URL: {JSON.stringify(innslag[0])}</div>}
+
+      <Graf innslag={innslag} />
+
       {erUtdatert && (
         <div id="utdatert">
           Obs: Siste innslag er ikkje frå i dag. Det kan tyde at nettbutikken

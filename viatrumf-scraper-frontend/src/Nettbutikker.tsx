@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Nettbutikker.css";
 import Nettbutikk from "./Nettbutikk.tsx";
 import baseurl from "./URL.ts";
+import { trim } from "./Trim.ts";
 
 function Nettbutikker() {
   const [nettbutikker, setNettbutikker] = useState<string[]>([]);
@@ -47,7 +48,7 @@ function Nettbutikker() {
           </option>
           {nettbutikker.map((nettbutikk) => (
             <option value={nettbutikk} key={nettbutikk}>
-              {nettbutikk?.replace(/_/g, " ")}
+              {trim(nettbutikk)}
             </option>
           ))}
         </select>
