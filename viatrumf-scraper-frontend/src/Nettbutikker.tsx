@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Nettbutikker.css";
 import Nettbutikk from "./Nettbutikk.tsx";
-import baseurl from "./URL.ts";
+import { backend } from "./URL.ts";
 import { trim } from "./Trim.ts";
 
 function Nettbutikker() {
@@ -20,7 +20,7 @@ function Nettbutikker() {
 
   useEffect(() => {
     axios
-      .get(baseurl + "/nettbutikkar")
+      .get(backend + "/nettbutikkar")
       .then((response) => response.data.sort(sort))
       .then((data) => {
         setNettbutikker(data);
@@ -31,11 +31,13 @@ function Nettbutikker() {
   return (
     <>
       <h1>Historikk for nettbutikkar på Viatrumf</h1>
-      {!valgtNettbutikk && <p>
-        Usikker på om Viatrumf-bonusen på nettbutikken du vil handle hos har
-        gått opp, ned eller er uendra? Sjekk ved å velje butikken i
-        nedtrekkslista.
-      </p>}
+      {!valgtNettbutikk && (
+        <p>
+          Usikker på om Viatrumf-bonusen på nettbutikken du vil handle hos har
+          gått opp, ned eller er uendra? Sjekk ved å velje butikken i
+          nedtrekkslista.
+        </p>
+      )}
       {loading && <h2>Laster...</h2>}
       {!loading && (
         <select

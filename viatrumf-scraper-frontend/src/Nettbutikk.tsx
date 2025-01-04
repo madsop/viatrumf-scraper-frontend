@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import baseurl from "./URL.ts";
+import { backend } from "./URL.ts";
 import moment from "moment";
 import "./Nettbutikk.css";
 import Graf from "./Graf.tsx";
@@ -15,12 +15,12 @@ interface Nettbutikktittel {
 function Nettbutikk({ namn }: Nettbutikktittel) {
   const [innslag, setInnslag] = useState<Innslag[]>([]);
   const [erUtdatert, setErUtdatert] = useState(false);
-  const [reverserteInnslag, setReverserteInnslag] = useState<Innslag[]>([])
+  const [reverserteInnslag, setReverserteInnslag] = useState<Innslag[]>([]);
 
   useEffect(() => {
-    axios.get(baseurl + "/nettbutikkar/" + namn).then((response) => {
+    axios.get(backend + "/nettbutikkar/" + namn).then((response) => {
       setInnslag(response.data);
-      setReverserteInnslag(response.data.reverse())
+      setReverserteInnslag(response.data.reverse());
     });
   }, [namn]);
 
@@ -45,15 +45,18 @@ function Nettbutikk({ namn }: Nettbutikktittel) {
         </a>
       )}
       <hr />
-      
+
       <Graf innslag={innslag} />
 
       <select id="datapunkter">
-        {reverserteInnslag.map(enkeltinnslag => 
-          <option value={enkeltinnslag.timestamp} key={enkeltinnslag.namn+enkeltinnslag.timestamp}>
-          {formatTime(enkeltinnslag.timestamp) + ": " + enkeltinnslag.verdi}
+        {reverserteInnslag.map((enkeltinnslag) => (
+          <option
+            value={enkeltinnslag.timestamp}
+            key={enkeltinnslag.namn + enkeltinnslag.timestamp}
+          >
+            {formatTime(enkeltinnslag.timestamp) + ": " + enkeltinnslag.verdi}
           </option>
-      )}
+        ))}
       </select>
 
       {erUtdatert && (
