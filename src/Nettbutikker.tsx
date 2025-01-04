@@ -55,11 +55,6 @@ function Nettbutikker() {
           ))}
         </select>
       )}
-      {valgtNettbutikk && (
-        <button onClick={() => setValgtNettbutikk(valgtNettbutikk)}>
-          <img id="reloadIcon" src="../public/reload-icon.png" alt="reload" />
-        </button>
-      )}
       {valgtNettbutikk && <Nettbutikk namn={valgtNettbutikk} />}
     </>
   );
