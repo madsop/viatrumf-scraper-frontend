@@ -25,14 +25,16 @@ function Nettbutikk({ namn }: Nettbutikktittel) {
   }, [namn]);
 
   useEffect(() => {
-    const sisteInnslag = innslag[innslag.length - 1];
+    const sisteInnslag = reverserteInnslag[0];
     if (sisteInnslag === undefined) {
       setErUtdatert(false);
       return;
     }
     const somDato = moment(sisteInnslag.timestamp, "YYYYMMDDTHHmmssZ");
+    console.log(somDato);
+    console.log(moment().subtract(1, "day").startOf("day"));
     setErUtdatert(somDato.isBefore(moment().subtract(1, "day").startOf("day")));
-  }, [innslag]);
+  }, [reverserteInnslag]);
 
   return (
     <>
