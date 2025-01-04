@@ -4,6 +4,5 @@ export const trim = (input: string): string => {
     .replace(/kr/g, "")
     .replace(" ", "")
     .replace(",", ".")
-    .replace(/_/g, ' ')
-    ;
+    .replace(/_/g, " ");
 };

@@ -29,13 +29,13 @@ function Nettbutikker() {
   }, []);
 
   return (
-    <div id="app">
+    <>
       <h1>Historikk for nettbutikkar på Viatrumf</h1>
-      <p>
+      {!valgtNettbutikk && <p>
         Usikker på om Viatrumf-bonusen på nettbutikken du vil handle hos har
         gått opp, ned eller er uendra? Sjekk ved å velje butikken i
         nedtrekkslista.
-      </p>
+      </p>}
       {loading && <h2>Laster...</h2>}
       {!loading && (
         <select
@@ -59,7 +59,7 @@ function Nettbutikker() {
         </button>
       )}
       {valgtNettbutikk && <Nettbutikk namn={valgtNettbutikk} />}
-    </div>
+    </>
   );
 }
 export default Nettbutikker;

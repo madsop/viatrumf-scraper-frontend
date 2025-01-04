@@ -1,15 +1,12 @@
-td {
-  width: 200px;
-  padding: 0;
-  margin: 0.1em 1em;
-}
-
 select#datapunkter {
   margin-top: 2em;
 }
 
 a {
   color: #385898;
+}
+a:hover {
+  color: #646cff;
 }
 
 #utdatert {

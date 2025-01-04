@@ -11,7 +11,7 @@ import {
   Tooltip
 } from "chart.js";
 import { trim } from "./Trim.ts";
-import { useEffect } from "react";
+import { formatTime } from "./FormatTime.ts";
 
 interface Grafdata {
   innslag: Innslag[];
@@ -20,7 +20,6 @@ interface Grafdata {
 
 function Graf({ innslag }: Grafdata) {
 
-    useEffect(() => {
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -29,13 +28,6 @@ function Graf({ innslag }: Grafdata) {
     Title,
     Tooltip
   )
-    }, [])
-
-  const formatTime = (timestamp: string): string => {
-    if (!timestamp) return ''
-    return moment(timestamp, 'YYYYMMDDTHHmmssZ').format('Do MMMM YYYY, HH.mm')
-  }
-
 
   const labels  = Array(innslag.length).fill('')
 
@@ -47,8 +39,8 @@ function Graf({ innslag }: Grafdata) {
             enabled: true,
             callbacks: {
                 label: (tooltipItems: any) => {
-                    const detteInnslaget = innslag[tooltipItems.dataIndex]
-                    return formatTime(detteInnslaget.timestamp) +": " + detteInnslaget.verdi
+                    const enkeltinnslag = innslag[tooltipItems.dataIndex]
+                    return formatTime(enkeltinnslag.timestamp) +": " + enkeltinnslag.verdi
                 }
         }
       },
@@ -70,9 +62,6 @@ const data = {
     ],
   };
 
-  return <>
-  {innslag && innslag.length}
-  <Line options={options} data={data} />
-  </>;
+  return <Line options={options} data={data} />;
 }
 export default Graf;

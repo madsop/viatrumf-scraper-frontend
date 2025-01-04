@@ -6,6 +6,7 @@ import "./Nettbutikk.css";
 import Graf from "./Graf.tsx";
 import { Innslag } from "./Innslag.ts";
 import { trim } from "./Trim.ts";
+import { formatTime } from "./FormatTime.ts";
 
 interface Nettbutikktittel {
   namn: string;
@@ -14,10 +15,12 @@ interface Nettbutikktittel {
 function Nettbutikk({ namn }: Nettbutikktittel) {
   const [innslag, setInnslag] = useState<Innslag[]>([]);
   const [erUtdatert, setErUtdatert] = useState(false);
+  const [reverserteInnslag, setReverserteInnslag] = useState<Innslag[]>([])
 
   useEffect(() => {
     axios.get(baseurl + "/nettbutikkar/" + namn).then((response) => {
       setInnslag(response.data);
+      setReverserteInnslag(response.data.reverse())
     });
   }, [namn]);
 
@@ -42,9 +45,16 @@ function Nettbutikk({ namn }: Nettbutikktittel) {
         </a>
       )}
       <hr />
-      {innslag.length && <div>URL: {JSON.stringify(innslag[0])}</div>}
-
+      
       <Graf innslag={innslag} />
+
+      <select id="datapunkter">
+        {reverserteInnslag.map(enkeltinnslag => 
+          <option value={enkeltinnslag.timestamp} key={enkeltinnslag.namn+enkeltinnslag.timestamp}>
+          {formatTime(enkeltinnslag.timestamp) + ": " + enkeltinnslag.verdi}
+          </option>
+      )}
+      </select>
 
       {erUtdatert && (
         <div id="utdatert">

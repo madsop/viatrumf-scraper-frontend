@@ -1,6 +1,6 @@
-button.reload {
+button {
   border: none;
-  background-color: inherit;
+  background-color: transparent;
   padding: 1px;
   margin: 0 4px 4px 4px;
   font-size: 0.7em;
@@ -22,5 +22,8 @@ img#reloadIcon {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  place-items: center;
+  margin: 2rem auto 0 auto;
+  padding: 0 2rem;
 }
+
