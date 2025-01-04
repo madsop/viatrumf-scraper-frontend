@@ -16,6 +16,10 @@ interface Grafdata {
   innslag: Innslag[];
 }
 
+interface TooltipItem {
+    dataIndex: number;
+}
+
 function Graf({ innslag }: Grafdata) {
   ChartJS.register(
     CategoryScale,
@@ -35,7 +39,7 @@ function Graf({ innslag }: Grafdata) {
       tooltip: {
         enabled: true,
         callbacks: {
-          label: (tooltipItems: any) => {
+          label: (tooltipItems: TooltipItem) => {
             const enkeltinnslag = innslag[tooltipItems.dataIndex];
             return (
               formatTime(enkeltinnslag.timestamp) + ": " + enkeltinnslag.verdi

@@ -2,7 +2,7 @@ export interface Innslag {
   href: string;
   kategori: string | undefined;
   namn: string;
-  popularitet: Number;
+  popularitet: number;
   timestamp: string;
   verdi: string;
 }
