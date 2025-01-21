@@ -20,7 +20,7 @@ function Nettbutikk({ namn }: Nettbutikktittel) {
   useEffect(() => {
     axios.get(backend + "/nettbutikkar/" + namn).then((response) => {
       setInnslag(response.data);
-      setReverserteInnslag(response.data.reverse());
+      setReverserteInnslag([...response.data].reverse());
     });
   }, [namn]);
 
