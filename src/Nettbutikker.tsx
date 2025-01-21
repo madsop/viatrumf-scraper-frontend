@@ -30,7 +30,7 @@ function Nettbutikker() {
 
   return (
     <>
-      <h1>Historikk for nettbutikkar på Viatrumf</h1>
+      <h1>Trumf netthandel-historikk</h1>
       {!valgtNettbutikk && (
         <p>
           Usikker på om Viatrumf-bonusen på nettbutikken du vil handle hos har
