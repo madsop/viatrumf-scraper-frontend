@@ -20,7 +20,7 @@ function Nettbutikk({ namn }: Nettbutikktittel) {
   useEffect(() => {
     axios.get(backend + "/nettbutikkar/" + namn).then((response) => {
       setInnslag(response.data);
-      setReverserteInnslag(response.data.reverse());
+      setReverserteInnslag([...response.data].reverse());
     });
   }, [namn]);
 
@@ -31,8 +31,6 @@ function Nettbutikk({ namn }: Nettbutikktittel) {
       return;
     }
     const somDato = moment(sisteInnslag.timestamp, "YYYYMMDDTHHmmssZ");
-    console.log(somDato);
-    console.log(moment().subtract(1, "day").startOf("day"));
     setErUtdatert(somDato.isBefore(moment().subtract(1, "day").startOf("day")));
   }, [reverserteInnslag]);
 
