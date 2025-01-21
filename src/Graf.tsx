@@ -65,6 +65,6 @@ function Graf({ innslag }: Grafdata) {
     ],
   };
 
-  return <Line options={options} data={data} height={75} />;
+  return <Line options={options} data={data} height={100} />;
 }
 export default Graf;
