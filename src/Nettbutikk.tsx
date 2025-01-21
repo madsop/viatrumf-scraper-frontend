@@ -31,8 +31,6 @@ function Nettbutikk({ namn }: Nettbutikktittel) {
       return;
     }
     const somDato = moment(sisteInnslag.timestamp, "YYYYMMDDTHHmmssZ");
-    console.log(somDato);
-    console.log(moment().subtract(1, "day").startOf("day"));
     setErUtdatert(somDato.isBefore(moment().subtract(1, "day").startOf("day")));
   }, [reverserteInnslag]);
 
