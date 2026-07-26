@@ -11,5 +11,8 @@ updates:
         - "*eslint*"
         - "typescript"
         - "prettier"
+    react:
+      patterns:
+        - "react*"
 
   open-pull-requests-limit: 99
