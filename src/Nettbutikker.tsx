@@ -11,6 +11,7 @@ function Nettbutikker() {
   const [valgtNettbutikk, setValgtNettbutikk] = useState<string | undefined>(
     undefined,
   );
+  const [kilde, setKilde] = useState<Kilde | undefined>(Kilde.TRUMF_NETTHANDEL);
 
   const sort = (a: string, b: string): number => {
     if (!a) return 1;
@@ -20,13 +21,13 @@ function Nettbutikker() {
 
   useEffect(() => {
     axios
-      .get(backend + "/nettbutikkar")
+      .get(backend + "/nettbutikkar?collectionName=" + formaterKilde(kilde))
       .then((response) => response.data.sort(sort))
       .then((data) => {
         setNettbutikker(data);
         setLoading(false);
       });
-  }, []);
+  }, [kilde]);
 
   return (
     <>
@@ -57,8 +58,19 @@ function Nettbutikker() {
           ))}
         </select>
       )}
-      {valgtNettbutikk && <Nettbutikk namn={valgtNettbutikk} />}
+      {valgtNettbutikk && <Nettbutikk namn={valgtNettbutikk} kilde={Kilde.TRUMF_NETTHANDEL} />}
     </>
   );
 }
 export default Nettbutikker;
+
+export enum Kilde {
+  TRUMF_NETTHANDEL, SAS_ONLINE_SHOPPING
+
+}
+
+export const formaterKilde = (kilde: Kilde | undefined) => {
+  if (kilde === Kilde.TRUMF_NETTHANDEL) {
+    return "TRUMF_NETTHANDEL";
+  } return "SAS_ONLINE_SHOPPING";
+}

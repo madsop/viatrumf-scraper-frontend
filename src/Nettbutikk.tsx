@@ -7,18 +7,20 @@ import Graf from "./Graf.tsx";
 import { Innslag } from "./Innslag.ts";
 import { trim } from "./Trim.ts";
 import { formatTime } from "./FormatTime.ts";
+import {formaterKilde, Kilde} from "./Nettbutikker.tsx";
 
 interface Nettbutikktittel {
   namn: string;
+  kilde: Kilde;
 }
 
-function Nettbutikk({ namn }: Nettbutikktittel) {
+function Nettbutikk({ namn, kilde }: Nettbutikktittel) {
   const [innslag, setInnslag] = useState<Innslag[]>([]);
   const [erUtdatert, setErUtdatert] = useState(false);
   const [reverserteInnslag, setReverserteInnslag] = useState<Innslag[]>([]);
 
   useEffect(() => {
-    axios.get(backend + "/nettbutikkar/" + namn).then((response) => {
+    axios.get(backend + "/nettbutikkar/" + namn + "?collectionName=" + formaterKilde(kilde)).then((response) => {
       setInnslag(response.data);
       setReverserteInnslag([...response.data].reverse());
     });
