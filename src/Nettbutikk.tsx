@@ -1,17 +1,25 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
-import { backend } from "./URL.ts";
+import {backend} from "./URL.ts";
 import moment from "moment";
 import "./Nettbutikk.css";
 import Graf from "./Graf.tsx";
-import { Innslag } from "./Innslag.ts";
-import { trim } from "./Trim.ts";
-import { formatTime } from "./FormatTime.ts";
-import {formaterKilde, Kilde} from "./Nettbutikker.tsx";
+import {Innslag, Type} from "./Innslag.ts";
+import {trim} from "./Trim.ts";
+import {formatTime} from "./FormatTime.ts";
+import {Kilde} from "./Nettbutikker.tsx";
 
 interface Nettbutikktittel {
   namn: string;
   kilde: Kilde;
+}
+
+const finnKildeURL = (kilde: Kilde) => {
+  if (kilde === Kilde.TRUMF_NETTHANDEL) {
+    return "https://trumfnetthandel.no/";
+  } else if (kilde === Kilde.SAS_ONLINE_SHOPPING) {
+    return "";
+  }
 }
 
 function Nettbutikk({ namn, kilde }: Nettbutikktittel) {
@@ -20,11 +28,11 @@ function Nettbutikk({ namn, kilde }: Nettbutikktittel) {
   const [reverserteInnslag, setReverserteInnslag] = useState<Innslag[]>([]);
 
   useEffect(() => {
-    axios.get(backend + "/nettbutikkar/" + namn + "?collectionName=" + formaterKilde(kilde)).then((response) => {
+    axios.get(backend + "/nettbutikkar/" + namn + "?collectionName=" + kilde).then((response) => {
       setInnslag(response.data);
       setReverserteInnslag([...response.data].reverse());
     });
-  }, [namn]);
+  }, [namn, kilde]);
 
   useEffect(() => {
     const sisteInnslag = reverserteInnslag[0];
@@ -34,13 +42,13 @@ function Nettbutikk({ namn, kilde }: Nettbutikktittel) {
     }
     const somDato = moment(sisteInnslag.timestamp, "YYYYMMDDTHHmmssZ");
     setErUtdatert(somDato.isBefore(moment().subtract(1, "day").startOf("day")));
-  }, [reverserteInnslag]);
+  }, [reverserteInnslag, kilde]);
 
   return (
     <>
       {innslag.length && (
         <a
-          href={"https://trumfnetthandel.no/" + innslag[0].href}
+          href={finnKildeURL(kilde) + innslag[0].href}
           target="_blank"
         >
           <h1>{trim(namn)}</h1>
@@ -57,6 +65,7 @@ function Nettbutikk({ namn, kilde }: Nettbutikktittel) {
             key={enkeltinnslag.namn + enkeltinnslag.timestamp}
           >
             {formatTime(enkeltinnslag.timestamp) + ": " + enkeltinnslag.verdi}
+            {enkeltinnslag.type && formaterType(enkeltinnslag.type)}
           </option>
         ))}
       </select>
@@ -72,3 +81,13 @@ function Nettbutikk({ namn, kilde }: Nettbutikktittel) {
 }
 
 export default Nettbutikk;
+
+function formaterType(type: Type | undefined) {
+  if (type === Type.NOK) {
+    return " NOK";
+  } else if (type === Type.PROSENT) {
+    return "%";
+  } else if (type === undefined) {
+    return "";
+  }
+}
