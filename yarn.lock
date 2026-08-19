@@ -1121,10 +1121,10 @@ glob-parent@^6.0.2:
   dependencies:
     is-glob "^4.0.3"
 
-globals@^17.8.0:
-  version "17.8.0"
-  resolved "https://registry.yarnpkg.com/globals/-/globals-17.8.0.tgz#a1f213a06adcd0eec38004c5cd39fef7af7e0830"
-  integrity sha512-Zz/LMDZScFmkakeL2cTHzf+PbWKdpU3uclqkZT7TjDG58j5WPt0PpA+n9uPI24fZtlw07q0OtEi84K+umsRzqQ==
+globals@^17.10.0:
+  version "17.10.0"
+  resolved "https://registry.yarnpkg.com/globals/-/globals-17.10.0.tgz#f9dbd847ae99e236f98b13095e2426ac3b25a45c"
+  integrity sha512-V0kztuWST2k8A/VbxAY8+L+7+Rgo3fyA24IHRLrZp7HOzJjV0gHSaZUjK9lpP/IrBSNite2tZ1prhRkinRu1CA==
 
 gopd@^1.2.0:
   version "1.2.0"
