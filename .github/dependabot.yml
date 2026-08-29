@@ -16,5 +16,10 @@ updates:
     react:
       patterns:
         - "react*"
+        - "@types/react*"
+    vite:
+      patterns:
+        - "vite"
+        - "@vitejs/*"
 
   open-pull-requests-limit: 99
