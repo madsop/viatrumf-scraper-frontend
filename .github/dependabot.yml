@@ -13,12 +13,14 @@ updates:
         - "*eslint*"
         - "typescript"
         - "prettier"
-    react:
+    frontend:
       patterns:
+        - "axios"
+        - "chart.js"
+        - "globals"
+        - "moment"
         - "react*"
         - "@types/react*"
-    vite:
-      patterns:
         - "vite"
         - "@vitejs/*"
 
